@@ -16,7 +16,9 @@ public interface OrderService {
 
     List<Order> findAllOrdersByUserId(UUID userId);
 
+    List<Order> findAllByOrderStatus(String status);
+
     Order changeOrderStatus(UUID orderId, OrderStatus orderStatus);
 
-    void setQuantityOfProductsInOrder(long orderId, long productId, long quantity);
+    void setQuantityOfProductsInOrder(UUID orderId, UUID productId, int quantity);
 }

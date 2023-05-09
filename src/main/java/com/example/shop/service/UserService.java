@@ -19,5 +19,5 @@ public interface UserService {
 
     void delete(UUID id);
 
-    void makeUserRoleManager(long id);
+    void makeUserRoleManager(UUID id);
 }

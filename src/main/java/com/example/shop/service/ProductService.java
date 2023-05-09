@@ -12,7 +12,7 @@ public interface ProductService {
 
     Product findById(UUID id);
 
-    Product findByProductName(String name);
+    Product findByProductTitle(String title);
 
     void delete(UUID id);
 
