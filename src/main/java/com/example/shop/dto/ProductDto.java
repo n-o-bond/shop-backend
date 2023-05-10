@@ -14,7 +14,7 @@ import java.util.UUID;
 public class ProductDto {
 
     private UUID id;
-    private String category;
+    private CategoryDto category;
     private String title;
     private String imageUrl;
     private String description;
