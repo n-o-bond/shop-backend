@@ -15,7 +15,7 @@ import java.util.UUID;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "UUID")
     private UUID id;
 
     @ManyToOne(cascade = CascadeType.REFRESH)

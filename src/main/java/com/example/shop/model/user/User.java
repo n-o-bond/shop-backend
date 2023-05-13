@@ -3,16 +3,14 @@ package com.example.shop.model.user;
 import com.example.shop.model.order.Order;
 import com.example.shop.model.product.Review;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(name = "users_email_qu", columnNames = "email"))
@@ -21,7 +19,11 @@ import java.util.UUID;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
     private UUID id;
 
     @Email
@@ -40,9 +42,10 @@ public class User implements UserDetails {
     @Column(nullable = false, length = 32)
     private String phone;
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(mappedBy = "user")
+    @Setter(AccessLevel.PRIVATE)
     @EqualsAndHashCode.Exclude
-    private Address address;
+    private List<Address> addresses = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -76,6 +79,16 @@ public class User implements UserDetails {
     public void removeReview(Review review){
         reviews.remove(review);
         review.setAuthor(null);
+    }
+
+    public void addAddress(Address address){
+        addresses.add(address);
+        address.setUser(this);
+    }
+
+    public void removeAddress(Address address){
+        addresses.remove(address);
+        address.setUser(null);
     }
 
     @Override

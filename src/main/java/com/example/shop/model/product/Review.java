@@ -14,7 +14,7 @@ import java.util.UUID;
 public class Review {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "UUID")
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)

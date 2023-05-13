@@ -1,6 +1,5 @@
 package com.example.shop.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +20,7 @@ public class UserDto {
     private String email;
 
     @NotBlank
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @NotBlank
@@ -30,6 +29,7 @@ public class UserDto {
     @NotBlank
     private String lastName;
 
+    @NotBlank
     private String phone;
 
     @JsonProperty("address")

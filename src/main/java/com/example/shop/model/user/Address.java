@@ -16,9 +16,10 @@ public class Address {
     public enum HouseType {FLAT, HOUSE}
 
     @Id
+    @GeneratedValue(generator = "UUID")
     private UUID id;
 
-    @OneToOne(optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude

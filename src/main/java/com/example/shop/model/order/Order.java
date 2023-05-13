@@ -1,13 +1,15 @@
 package com.example.shop.model.order;
 
-import com.example.shop.model.product.Product;
+import com.example.shop.model.user.Address;
 import com.example.shop.model.user.User;
 import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "orders")
@@ -16,7 +18,7 @@ import java.util.*;
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "UUID")
     private UUID id;
 
     @Column(nullable = false)
@@ -25,6 +27,10 @@ public class Order {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id")
+    private Address address;
 
     @Column(nullable = false)
     private OrderStatus status;
