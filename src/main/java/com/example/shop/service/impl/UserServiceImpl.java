@@ -28,11 +28,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public User save(User user) {
         checkIfUserIsNull(user);
+        checkIfRoleIsNull(user);
         return userRepository.save(user);
     }
 
     private static void checkIfUserIsNull(User user) {
-        if (user == null){
+        if (user == null) {
             log.error(NULL_ENTITY_MESSAGE);
             throw new NullEntityReferenceException(NULL_ENTITY_MESSAGE);
         }
@@ -42,14 +43,21 @@ public class UserServiceImpl implements UserService {
     public User update(User user) {
         checkIfUserIsNull(user);
         findById(user.getId());
+        checkIfRoleIsNull(user);
         return userRepository.save(user);
+    }
+
+    private static void checkIfRoleIsNull(User user) {
+        if (user.getRole() == null) {
+            user.setRole(Role.USER);
+        }
     }
 
     @Override
     public User findById(UUID id) {
         return userRepository.findById(id).orElseThrow(() -> {
-                log.error(NOT_FOUND_ENTITY_MESSAGE.formatted(id));
-                throw new EntityNotFoundException(NOT_FOUND_ENTITY_MESSAGE.formatted(id));
+            log.error(NOT_FOUND_ENTITY_MESSAGE.formatted(id));
+            throw new EntityNotFoundException(NOT_FOUND_ENTITY_MESSAGE.formatted(id));
         });
     }
 
@@ -75,19 +83,5 @@ public class UserServiceImpl implements UserService {
             log.error(NOT_FOUND_ENTITY_MESSAGE.formatted(id));
             throw new EntityNotFoundException(NOT_FOUND_ENTITY_MESSAGE.formatted(id));
         });
-    }
-
-    @Override
-    public void makeUserRoleManager(UUID id) {
-        userRepository.findById(id).ifPresentOrElse(UserServiceImpl::setManagerRole, () ->{
-            log.error(NOT_FOUND_ENTITY_MESSAGE.formatted(id));
-            throw new EntityNotFoundException(NOT_FOUND_ENTITY_MESSAGE.formatted(id));
-        });
-    }
-
-    private static void setManagerRole(User user) {
-        if(user.getRole().equals(Role.USER)){
-            user.setRole(Role.MANAGER);
-        }
     }
 }

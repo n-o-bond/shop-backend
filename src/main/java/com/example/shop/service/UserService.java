@@ -18,6 +18,4 @@ public interface UserService {
     List<User> findAll();
 
     void delete(UUID id);
-
-    void makeUserRoleManager(UUID id);
 }

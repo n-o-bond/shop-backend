@@ -11,5 +11,5 @@ public interface OrderProductMapper {
 
     OrderProductDto toDto(OrderProduct orderProduct);
     OrderProduct toEntity(OrderProductDto orderProductDto);
-    List<OrderProductDto> productDtos(List<OrderProduct> products);
+    List<OrderProductDto> toDtos(List<OrderProduct> products);
 }

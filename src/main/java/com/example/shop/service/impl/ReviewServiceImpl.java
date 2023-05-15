@@ -30,7 +30,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     private static void checkIfReviewIsNull(Review review) {
-        if(review == null){
+        if (review == null) {
             log.error(NULL_ENTITY_MESSAGE);
             throw new NullEntityReferenceException(NULL_ENTITY_MESSAGE);
         }

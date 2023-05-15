@@ -39,7 +39,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     private static void checkIfOrderIsNull(Order order) {
-        if (order == null){
+        if (order == null) {
             log.error(NULL_ENTITY_MESSAGE);
             throw new NullEntityReferenceException(NULL_ENTITY_MESSAGE);
         }
@@ -79,7 +79,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order changeOrderStatus(UUID orderId, OrderStatus status) {
         Order order = findById(orderId);
-        switch (order.getStatus()){
+        switch (order.getStatus()) {
             case DRAFT -> changeStatusToPAYED(status, order);
             case PAYED -> changeStatusToDELIVERINGorREFUNDED(status, order);
             case DELIVERING -> changeStatusToCOMPLETEDorRETURNING(status, order);
@@ -88,13 +88,13 @@ public class OrderServiceImpl implements OrderService {
         return save(order);
     }
 
-    private void  changeStatusToREFUNDED(OrderStatus status, Order order){
+    private void changeStatusToREFUNDED(OrderStatus status, Order order) {
         if (status == OrderStatus.REFUNDED) {
             order.setStatus(OrderStatus.REFUNDED);
         }
     }
 
-    private void changeStatusToCOMPLETEDorRETURNING(OrderStatus status, Order order){
+    private void changeStatusToCOMPLETEDorRETURNING(OrderStatus status, Order order) {
         if (status == OrderStatus.COMPLETED) {
             order.setStatus(OrderStatus.COMPLETED);
         } else if (status == OrderStatus.RETURNING) {
@@ -102,7 +102,7 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
-    private void changeStatusToDELIVERINGorREFUNDED(OrderStatus status, Order order){
+    private void changeStatusToDELIVERINGorREFUNDED(OrderStatus status, Order order) {
         if (status == OrderStatus.REFUNDED) {
             order.setStatus(OrderStatus.REFUNDED);
         } else if (status == OrderStatus.DELIVERING) {
@@ -110,7 +110,7 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
-    private void changeStatusToPAYED(OrderStatus status, Order order){
+    private void changeStatusToPAYED(OrderStatus status, Order order) {
         if (status == OrderStatus.PAYED) {
             order.setStatus(OrderStatus.PAYED);
         }
@@ -124,7 +124,7 @@ public class OrderServiceImpl implements OrderService {
         id.setOrderId(orderId);
         id.setProductId(productId);
 
-        if(quantity == 0){
+        if (quantity == 0) {
             orderProductRepository.deleteById(id);
         }
 

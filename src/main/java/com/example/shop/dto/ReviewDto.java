@@ -13,9 +13,11 @@ import java.util.UUID;
 public class ReviewDto {
 
     private UUID id;
+    @NotBlank
     private UUID authorId;
     @NotBlank
     private double rating;
     private String description;
+    @NotBlank
     private UUID productId;
 }

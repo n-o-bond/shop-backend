@@ -1,5 +1,6 @@
 package com.example.shop.dto;
 
+import com.example.shop.model.user.Role;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,4 +35,6 @@ public class UserDto {
 
     @JsonProperty("address")
     private AddressDto address;
+
+    private Role role;
 }

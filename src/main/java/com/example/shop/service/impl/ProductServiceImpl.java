@@ -36,7 +36,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private static void checkIfProductIsNull(Product product) {
-        if (product == null){
+        if (product == null) {
             log.error(NULL_ENTITY_MESSAGE);
             throw new NullEntityReferenceException(NULL_ENTITY_MESSAGE);
         }
@@ -85,7 +85,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Category findByCategoryName(String name) {
         checkIfCategoryIsBlank(name);
-        return categoryRepository.findByName(name).orElseThrow(()->{
+        return categoryRepository.findByName(name).orElseThrow(() -> {
             log.error(NOT_FOUND_CATEGORY_MESSAGE.formatted(name));
             throw new EntityNotFoundException(NOT_FOUND_CATEGORY_MESSAGE.formatted(name));
         });
