@@ -20,6 +20,8 @@ public interface ProductService {
 
     List<Product> findAllProductsInCategory(String category);
 
+    Category save(Category category);
+
     List<Category> findAllCategories();
 
     Category findByCategoryName(String name);

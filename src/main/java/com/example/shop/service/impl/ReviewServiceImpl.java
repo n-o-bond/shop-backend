@@ -21,7 +21,7 @@ public class ReviewServiceImpl implements ReviewService {
     private static final String NULL_ENTITY_MESSAGE = "Review cannot be 'null'";
     private static final String ENTITY_DELETED_MESSAGE = "Review (id=UUID: %s) was deleted";
 
-    private ReviewRepository reviewRepository;
+    private final ReviewRepository reviewRepository;
 
     @Override
     public Review save(Review review) {

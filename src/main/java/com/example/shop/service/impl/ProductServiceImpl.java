@@ -26,8 +26,8 @@ public class ProductServiceImpl implements ProductService {
     private static final String NULL_ENTITY_MESSAGE = "Product cannot be 'null'";
     private static final String ENTITY_DELETED_MESSAGE = "Product (id=UUID: %s) was deleted";
 
-    private ProductRepository productRepository;
-    private CategoryRepository categoryRepository;
+    private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
 
     @Override
     public Product save(Product product) {
@@ -75,6 +75,12 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> findAllProductsInCategory(String category) {
         checkIfCategoryIsBlank(category);
         return productRepository.findAllByCategoryName(category);
+    }
+
+    @Override
+    public Category save(Category category) {
+        checkIfCategoryIsBlank(category.getName());
+        return categoryRepository.save(category);
     }
 
     @Override

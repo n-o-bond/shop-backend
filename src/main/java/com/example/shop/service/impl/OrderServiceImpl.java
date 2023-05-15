@@ -28,9 +28,9 @@ public class OrderServiceImpl implements OrderService {
     private static final String NULL_ENTITY_MESSAGE = "Order cannot be 'null'";
     private static final String ENTITY_DELETED_MESSAGE = "Order (id=UUID: %s) was deleted";
 
-    private OrderRepository orderRepository;
-    private OrderProductRepository orderProductRepository;
-    private ProductService productService;
+    private final OrderRepository orderRepository;
+    private final OrderProductRepository orderProductRepository;
+    private final ProductService productService;
 
     @Override
     public Order save(Order order) {
