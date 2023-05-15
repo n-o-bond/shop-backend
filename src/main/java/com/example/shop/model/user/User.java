@@ -15,6 +15,7 @@ import java.util.*;
 @Entity
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(name = "users_email_qu", columnNames = "email"))
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 @Data
 public class User implements UserDetails {
 
@@ -42,10 +43,13 @@ public class User implements UserDetails {
     @Column(nullable = false, length = 32)
     private String phone;
 
-    @OneToMany(mappedBy = "user")
     @Setter(AccessLevel.PRIVATE)
-    @EqualsAndHashCode.Exclude
-    private List<Address> addresses = new ArrayList<>();
+    @ManyToMany(cascade = {CascadeType.REFRESH, CascadeType.MERGE})
+    @JoinTable(name = "user_address",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "address_id")
+    )
+    private Set<Address> addresses = new HashSet<>();
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -61,34 +65,34 @@ public class User implements UserDetails {
     @ToString.Exclude
     private List<Review> reviews;
 
-    public void addOrder(Order order){
+    public void addOrder(Order order) {
         orders.add(order);
         order.setUser(this);
     }
 
-    public void removeOrder(Order order){
+    public void removeOrder(Order order) {
         orders.remove(order);
         order.setUser(null);
     }
 
-    public void addReview(Review review){
+    public void addReview(Review review) {
         reviews.add(review);
         review.setAuthor(this);
     }
 
-    public void removeReview(Review review){
+    public void removeReview(Review review) {
         reviews.remove(review);
         review.setAuthor(null);
     }
 
-    public void addAddress(Address address){
+    public void addAddress(Address address) {
         addresses.add(address);
-        address.setUser(this);
+        address.getUsers().add(this);
     }
 
-    public void removeAddress(Address address){
+    public void removeAddress(Address address) {
         addresses.remove(address);
-        address.setUser(null);
+        address.getUsers().remove(this);
     }
 
     @Override

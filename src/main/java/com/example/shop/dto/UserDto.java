@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -33,8 +34,7 @@ public class UserDto {
     @NotBlank
     private String phone;
 
-    @JsonProperty("address")
-    private AddressDto address;
+    private Set<AddressDto> addresses;
 
     private Role role;
 }

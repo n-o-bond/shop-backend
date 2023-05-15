@@ -1,16 +1,16 @@
 package com.example.shop.model.user;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Table(name = "adresses")
+@Table(name = "addresses")
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 @Data
 public class Address {
     public enum HouseType {FLAT, HOUSE}
@@ -19,11 +19,9 @@ public class Address {
     @GeneratedValue(generator = "UUID")
     private UUID id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id")
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    private User user;
+    @Setter(AccessLevel.PRIVATE)
+    @ManyToMany(mappedBy = "addresses")
+    private Set<User> users = new HashSet<>();
 
     @Column(nullable = false)
     private String city;
@@ -40,4 +38,13 @@ public class Address {
 
     private long flatNumber;
 
+    public void addUser(User user) {
+        users.add(user);
+        user.getAddresses().add(this);
+    }
+
+    public void removeUser(User user) {
+        users.remove(user);
+        user.getAddresses().remove(this);
+    }
 }

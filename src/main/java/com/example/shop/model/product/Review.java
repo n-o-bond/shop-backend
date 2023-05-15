@@ -2,6 +2,7 @@ package com.example.shop.model.product;
 
 import com.example.shop.model.user.User;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "reviews")
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 @Data
 public class Review {
 

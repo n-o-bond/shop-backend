@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
@@ -15,9 +16,11 @@ public class ProductDto {
 
     private UUID id;
     private CategoryDto category;
+    @NotBlank
     private String title;
     private String imageUrl;
     private String description;
+    @NotBlank
     private BigDecimal price;
     private List<ReviewDto> reviewDtos;
 }

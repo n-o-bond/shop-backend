@@ -10,6 +10,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "categories")
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 @Data
 public class Category {
 

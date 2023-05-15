@@ -2,6 +2,7 @@ package com.example.shop.model.order;
 
 import com.example.shop.model.product.Product;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "orders_products")
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 @Data
 public class OrderProduct {
 

@@ -11,6 +11,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "products")
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 @Data
 public class Product {
 

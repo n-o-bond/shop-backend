@@ -14,6 +14,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "orders")
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 @Data
 public class Order {
 
@@ -37,7 +38,6 @@ public class Order {
 
     @OneToMany(mappedBy = "order")
     @Setter(AccessLevel.PRIVATE)
-    @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Set<OrderProduct> products = new HashSet<>();
 
