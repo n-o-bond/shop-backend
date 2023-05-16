@@ -30,13 +30,12 @@ public class Address {
     private String street;
 
     @Column(nullable = false)
-    private long houseNumber;
+    private int houseNumber;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private HouseType houseType;
 
-    private long flatNumber;
+    private int flatNumber;
 
     public void addUser(User user) {
         users.add(user);

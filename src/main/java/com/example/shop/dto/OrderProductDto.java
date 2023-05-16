@@ -13,5 +13,5 @@ public class OrderProductDto {
 
     private UUID orderId;
     private UUID productId;
-    private int Quantity;
+    private int quantity;
 }

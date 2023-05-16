@@ -1,7 +1,10 @@
 package com.example.shop.controller;
 
+import com.example.shop.dto.AddressDto;
 import com.example.shop.dto.UserDto;
+import com.example.shop.dto.mapper.AddressMapper;
 import com.example.shop.dto.mapper.UserMapper;
+import com.example.shop.model.user.Address;
 import com.example.shop.model.user.User;
 import com.example.shop.security.jwtutils.JwtProvider;
 import com.example.shop.security.jwtutils.models.JwtRequest;
@@ -34,6 +37,8 @@ public class UserController {
     private final UserService userService;
 
     private final UserMapper userMapper;
+
+    private final AddressMapper addressMapper;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -83,5 +88,18 @@ public class UserController {
     public List<UserDto> getAllUsers() {
         List<User> users = userService.findAll();
         return userMapper.toDtos(users);
+    }
+
+    @PostMapping("/addresses")
+    public AddressDto createAddress(@RequestBody AddressDto addressDto) {
+        Address address = addressMapper.toEntity(addressDto);
+        Address createdAddress = userService.save(address);
+        return addressMapper.toDto(createdAddress);
+    }
+
+    @DeleteMapping("/addresses/{addressId}")
+    public ResponseEntity<?> deleteAddress(@PathVariable("addressId") UUID addressId){
+        userService.deleteAddress(addressId);
+        return ResponseEntity.noContent().build();
     }
 }

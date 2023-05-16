@@ -15,7 +15,7 @@ import java.util.UUID;
 public class ProductDto {
 
     private UUID id;
-    private CategoryDto category;
+    private UUID categoryId;
     @NotBlank
     private String title;
     private String imageUrl;

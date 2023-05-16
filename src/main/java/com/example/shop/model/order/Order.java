@@ -39,18 +39,18 @@ public class Order {
     @OneToMany(mappedBy = "order")
     @Setter(AccessLevel.PRIVATE)
     @ToString.Exclude
-    private Set<OrderProduct> products = new HashSet<>();
+    private Set<OrderProduct> productsQuantity = new HashSet<>();
 
     @Column(nullable = false)
     private BigDecimal totalPrice;
 
     public void addOrderProduct(OrderProduct orderProduct){
-        products.add(orderProduct);
+        productsQuantity.add(orderProduct);
         orderProduct.setOrder(this);
     }
 
     public void removeOrderProduct(OrderProduct orderProduct){
-        products.remove(orderProduct);
+        productsQuantity.remove(orderProduct);
         orderProduct.setOrder(null);
     }
 }

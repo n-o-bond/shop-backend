@@ -1,5 +1,6 @@
 package com.example.shop.service;
 
+import com.example.shop.model.user.Address;
 import com.example.shop.model.user.User;
 
 import java.util.List;
@@ -18,4 +19,8 @@ public interface UserService {
     List<User> findAll();
 
     void delete(UUID id);
+
+    Address save(Address address);
+
+    void deleteAddress(UUID addressId);
 }

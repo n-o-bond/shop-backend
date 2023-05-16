@@ -18,13 +18,13 @@ public class OrderDto {
 
     private UUID id;
     @NotBlank
-    private LocalDate createAt;
+    private LocalDate createdAt;
     @NotBlank
     private UUID userId;
     @NotBlank
     private UUID addressId;
     @NotBlank
-    private OrderStatus orderStatus;
+    private OrderStatus status;
     private Set<OrderProductDto> productsQuantity;
     @NotBlank
     private BigDecimal totalPrice;
